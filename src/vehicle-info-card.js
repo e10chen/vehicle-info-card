@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import '@lrnwebcomponents/meme-maker';
 
 const toyotaTacoma = new URL('../assets/toyota_tacoma.jpg', import.meta.url).href;
 
@@ -99,9 +100,8 @@ buttons:focus{
   <p class ="text">
     ${this.vehicleDescription}
   </p>
-
+    <slot></slot>
 </div>
-
     `;
   }
 }

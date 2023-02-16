@@ -36,7 +36,9 @@
       </button>
   
 <div id = "app">
-  <vehicle-info-card></vehicle-info-card>
+  <vehicle-info-card>
+    <p>Test</p>
+</vehicle-info-card>
 </div>
 
   <script type="module" src="./src/vehicle-info-card.js"></script>
@@ -98,7 +100,7 @@ document.querySelector(".changeTitle").addEventListener("click", function(e){
   if (document.querySelector('vehicle-info-card').modelName) {
     document.querySelector('vehicle-info-card').modelName = "Something Else";
   } else {
-    document.querySelector('vehicle-info-card').modelName;
+    document.querySelector('vehicle-info-card').modelName = "Toyota Tocoma";
   }
 });
 
