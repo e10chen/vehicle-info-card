@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="Description" content="Put your description here.">
+  <base href="/">
+
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background-color: #ededed;
+    }
+  </style>
+  <title>vehicle-info-card</title>
+</head>
+
+<body>
+  <div class="buttons">
+    <button class="copy" >Copy</button>
+  
+    <button class="toggleBackGroundColor" >Change Background Color</button>
+  
+    <button class="changeTitle">Change Title</button>
+  
+    <button class="deleteButton">Delete Last Instance</button>
+  
+    </div> 
+    
+    <button class="detailButton">      
+      Detail
+      </button>
+  
+<div id = "app">
+  <vehicle-info-card></vehicle-info-card>
+</div>
+
+  <script type="module" src="./src/vehicle-info-card.js"></script>
+
+<script>
+
+
+document.querySelector('.copy').addEventListener("click", function(e){   
+  
+  const cloneCard = document.querySelector('vehicle-info-card').cloneNode();
+  document.querySelector('#app').appendChild(cloneCard); 
+  
+});
+
+document.querySelector(".deleteButton").addEventListener("click", function(e){ 
+  document.querySelector('#app :last-child').remove();
+  
+});
+
+// This handler will be executed only once when the cursor
+// moves over the unordered list
+document.querySelector('.detailButton').addEventListener("mouseenter", function (e) {
+  // highlight the mouseenter target
+
+  e.target.style.background= "green";
+  detailButton.focus();
+});
+
+document.querySelector('.detailButton').addEventListener("mouseleave", function (e) {
+  // highlight the mouseenter target
+  e.target.style.background = "";
+  detailButton.blur()
+});
+
+document.querySelector('.detailButton').addEventListener("click", function(e){
+  const paragraph = document.querySelector('vehicle-info-card').shadowRoot.querySelector('.text'); 
+  if (paragraph.style.display === "none"){
+    paragraph.style.display = "block"
+  } else {
+    paragraph.style.display = "none";
+  }
+  
+});
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+document.querySelector(".toggleBackGroundColor").addEventListener("click", function(e){   
+  document.querySelector('vehicle-info-card').shadowRoot.querySelector('.all').style.backgroundColor = getRandomColor(); 
+});
+
+document.querySelector(".changeTitle").addEventListener("click", function(e){  
+  if (document.querySelector('vehicle-info-card').modelName) {
+    document.querySelector('vehicle-info-card').modelName = "Something Else";
+  } else {
+    document.querySelector('vehicle-info-card').modelName;
+  }
+});
+
+</script>
+</body>
+
+</html>
