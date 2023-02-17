@@ -37,14 +37,17 @@
   
 <div id = "app">
   <vehicle-info-card>
-    <p>Test</p>
+    
+    <slot name ="subtitle"></slot>
+
+    <slot name ="img"></slot>>
+  
 </vehicle-info-card>
 </div>
 
   <script type="module" src="./src/vehicle-info-card.js"></script>
 
 <script>
-
 
 document.querySelector('.copy').addEventListener("click", function(e){   
   
@@ -54,7 +57,11 @@ document.querySelector('.copy').addEventListener("click", function(e){
 });
 
 document.querySelector(".deleteButton").addEventListener("click", function(e){ 
+  if (document.querySelector('#app :last-child') != document.querySelector('vehicle-info-card')) {
   document.querySelector('#app :last-child').remove();
+} else {
+  alert('Stop it');
+}
   
 });
 
