@@ -110,7 +110,7 @@ meme-maker {
 
   constructor() {
     super();
-    this.modelName = "Toytoa Tacoma";
+    this.modelName = "Toyota Tacoma";
     this.vehicleDescription = "The image above is a Tacoma pickup truck made by the Japanese automaker Toyota. Toyota has been making the Tacoma pickup truck since 1995. The Tacoma has two engines options: 2.7-liter 4-Cylinder and the 3.5-liter V6. It has a miles per gallon of 20 in the city and 23 on the highway."
     this.topText = "IM A"
     this.bottomText = "TRRRUCK"
@@ -125,9 +125,7 @@ meme-maker {
   ${this.modelName}
 </h1>
 
-<div slot="subtitle"> 
-  <h2>${this.subtitle}</h2> 
-  </div>
+  <slot name = "subtitle"></slot>
 
   <meme-maker alt = "A Toyota Tacoma" image-url = "${toyotaTacoma}" top-text = "${this.topText}" bottom-text = "${this.topText}"></meme-maker>
   
@@ -135,10 +133,7 @@ meme-maker {
     ${this.vehicleDescription}
   </p>
 
-  <div slot="img">
-    <meme-maker image-url = "${this.img}" top-text = "VROOM" bottom-text = "VROOM"></meme-maker>
-  </div>
-  
+  <slot name = "img"></slot>
 
 </div>
     `;

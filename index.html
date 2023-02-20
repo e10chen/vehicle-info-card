@@ -38,10 +38,15 @@
 <div id = "app">
   <vehicle-info-card>
     
-    <slot name ="subtitle"></slot>
+    <div slot="subtitle"> 
+      <h2>Ethan Chen</h2> 
+      </div>
+    
+      <div slot="img">
+        <meme-maker image-url = "https://hips.hearstapps.com/hmg-prod/images/2023-toyota-gr-corolla-111-1648581910.jpg" top-text = "VROOM" bottom-text = "VROOM"></meme-maker>
+      </div>
 
-    <slot name ="img"></slot>>
-  
+
 </vehicle-info-card>
 </div>
 
@@ -104,10 +109,10 @@ document.querySelector(".toggleBackGroundColor").addEventListener("click", funct
 });
 
 document.querySelector(".changeTitle").addEventListener("click", function(e){  
-  if (document.querySelector('vehicle-info-card').modelName) {
-    document.querySelector('vehicle-info-card').modelName = "Something Else";
+  if (document.querySelector('vehicle-info-card').modelName == "Toyota Tacoma") {
+    document.querySelector('vehicle-info-card').setAttribute("modelName", "Something Else");
   } else {
-    document.querySelector('vehicle-info-card').modelName = "Toyota Tocoma";
+    document.querySelector('vehicle-info-card').setAttribute("modelName", "Toyota Tacoma");
   }
 });
 
