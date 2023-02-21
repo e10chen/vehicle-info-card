@@ -44,14 +44,14 @@ export class VehicleInfoCard extends LitElement {
 }
 
 .all{
+  display: inline-block;
   border-style: solid;
   border-radius: 20px;
-  text-align: center;
+  margin: 10px;
   padding: 20px;
   border-width: 5px;
   width: 300px;
   max-width: 500px;
-  margin: auto;
   background-color: coral;
   margin-top: 10px;
 }
@@ -64,6 +64,7 @@ export class VehicleInfoCard extends LitElement {
 
 .title{
   font-size: 40px;
+  text-align: center;
 }
 
 .buttons{
@@ -127,11 +128,14 @@ meme-maker {
 
   <slot name = "subtitle"></slot>
 
-  <meme-maker alt = "A Toyota Tacoma" image-url = "${toyotaTacoma}" top-text = "${this.topText}" bottom-text = "${this.topText}"></meme-maker>
+  <meme-maker alt = "A Toyota Tacoma" image-url = "${toyotaTacoma}" top-text = "${this.topText}" bottom-text = "${this.bottomText}"></meme-maker>
   
+  <details>
+  <summary>Car Details</summary>
   <p class ="text">
     ${this.vehicleDescription}
   </p>
+</details>
 
   <slot name = "img"></slot>
 
