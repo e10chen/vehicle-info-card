@@ -1,122 +1,161 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="Description" content="Put your description here." />
+    <base href="/" />
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="Description" content="Put your description here.">
-  <base href="/">
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        background-color: #ededed;
+        --vehicle-info-card-background-color: green;
+        --vehicle-info-card-text-color: red;
+        --vehicle-info-card-border-style: solid;
+        --vehicle-info-card-border-radius: 20px;
+        --vehicle-info-card-text-font-size: 16px;
+        --vehicle-info-card-text-color: blue;
+        --vehicle-info-card-title-font-size: 40px;
+        --vehicle-info-card-title-color: white;
+        --vehicle-info-card-border-color: solid yellow;
+      }
 
-  <style>
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: sans-serif;
-      background-color: #ededed;
-    }
-  </style>
-  <title>vehicle-info-card</title>
-</head>
+      vehicle-info-card::part(descriptionText){
+        font-size: 20px;
+      }
 
-<body>
-  <div class="buttons">
-    <button class="copy" >Copy</button>
-  
-    <button class="toggleBackGroundColor" >Change Background Color</button>
-  
-    <button class="changeTitle">Change Title</button>
-  
-    <button class="deleteButton">Delete Last Instance</button>
-  
-    </div> 
-    
-    <button class="detailButton">      
-      Detail
-      </button>
-  
-<div id = "app">
-  <vehicle-info-card>
-    
-    <div slot="subtitle"> 
-      <h2>Ethan Chen</h2> 
-      </div>
-    
-      <div slot="img">
-        <meme-maker image-url = "https://hips.hearstapps.com/hmg-prod/images/2023-toyota-gr-corolla-111-1648581910.jpg" top-text = "VROOM" bottom-text = "VROOM"></meme-maker>
-      </div>
+      vehicle-info-card::part(slotSubtitle){
+        text-align: center;
+      }
 
+      vehicle-info-card::part(detailArrowthingy){
+        padding: 10px; 
+      }
 
-</vehicle-info-card>
-</div>
+    </style>
+    <title>vehicle-info-card</title>
+  </head>
 
-  <script type="module" src="./src/vehicle-info-card.js"></script>
+  <body>
+    <div class="buttons">
+      <button class="copy">Copy</button>
 
-<script>
+      <button class="toggleBackGroundColor">Change Background Color</button>
 
-document.querySelector('.copy').addEventListener("click", function(e){   
-  
-  const cloneCard = document.querySelector('vehicle-info-card').cloneNode();
-  document.querySelector('#app').appendChild(cloneCard); 
-  
-});
+      <button class="changeTitle">Change Title</button>
 
-document.querySelector(".deleteButton").addEventListener("click", function(e){ 
-  if (document.querySelector('#app :last-child') != document.querySelector('vehicle-info-card')) {
-  document.querySelector('#app :last-child').remove();
-} else {
-  alert('Stop it');
-}
-  
-});
+      <button class="deleteButton">Delete Last Instance</button>
 
-// This handler will be executed only once when the cursor
-// moves over the unordered list
-document.querySelector('.detailButton').addEventListener("mouseenter", function (e) {
-  // highlight the mouseenter target
+      <button onclick="toggleDetails()" class="details">Detail</button>
+    </div>
 
-  e.target.style.background= "green";
-  detailButton.focus();
-});
+    <div id="app">
+      <vehicle-info-card>
+        <div slot="subtitle">
+          <h2>Ethan Chen</h2>
+        </div>
 
-document.querySelector('.detailButton').addEventListener("mouseleave", function (e) {
-  // highlight the mouseenter target
-  e.target.style.background = "";
-  detailButton.blur()
-});
+        <div slot="img">
+          <meme-maker
+            image-url="https://hips.hearstapps.com/hmg-prod/images/2023-toyota-gr-corolla-111-1648581910.jpg"
+            top-text="VROOM"
+            bottom-text="VROOM"
+          ></meme-maker>
+        </div>
+      </vehicle-info-card>
+    </div>
 
-document.querySelector('.detailButton').addEventListener("click", function(e){
-  const paragraph = document.querySelector('vehicle-info-card').shadowRoot.querySelector('.text'); 
-  if (paragraph.style.display === "none"){
-    paragraph.style.display = "block"
-  } else {
-    paragraph.style.display = "none";
-  }
-  
-});
+    <script type="module" src="./src/vehicle-info-card.js"></script>
 
-function getRandomColor() {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
+    <script>
+      const copyButton = document.querySelector(".copy");
 
-document.querySelector(".toggleBackGroundColor").addEventListener("click", function(e){   
-  document.querySelector('vehicle-info-card').shadowRoot.querySelector('.all').style.backgroundColor = getRandomColor(); 
-});
+      const deleteButton = document.querySelector(".deleteButton");
 
-document.querySelector(".changeTitle").addEventListener("click", function(e){  
-  if (document.querySelector('vehicle-info-card').modelName == "Toyota Tacoma") {
-    document.querySelector('vehicle-info-card').setAttribute("modelName", "Something Else");
-  } else {
-    document.querySelector('vehicle-info-card').setAttribute("modelName", "Toyota Tacoma");
-  }
-});
+      const detailButton = document.querySelector(".details");
 
-</script>
-</body>
+      const toggleButton = document.querySelector(".toggleBackGroundColor");
 
+      const changeTitle = document.querySelector(".changeTitle");
+
+      const card = document.querySelector("vehicle-info-card");
+      
+      copyButton.addEventListener("click", function (e) {
+        const cloneCard = card.cloneNode(true);
+        var child = document.querySelector("#app").appendChild(cloneCard.cloneNode(true));
+        child.classList.add("card2");
+      });
+
+      deleteButton.addEventListener("click", function (e) {
+        var x = document.querySelector(".card2");
+        x.remove(0);
+        
+        // if (
+        //   document.querySelector("#app :last-child") !=
+        //   document.querySelector("vehicle-info-card")
+        // ) {
+        //   document.querySelector("#app :last-child").remove();
+        // } else {
+        //   alert("Stop it");
+        // }
+      });
+
+      // This handler will be executed only once when the cursor
+      // moves over the unordered list
+      detailButton.addEventListener("mouseenter", function (e) {
+        // highlight the mouseenter target
+
+        e.target.style.background = "green";
+        detailButton.focus();
+      });
+
+      detailButton.addEventListener("mouseleave", function (e) {
+        // highlight the mouseenter target
+        e.target.style.background = "";
+        detailButton.blur();
+      });
+
+      function toggleDetails() {
+        document.querySelector("vehicle-info-card").toggleDetails();
+      }
+
+      function getRandomColor() {
+        var letters = "0123456789ABCDEF";
+        var color = "#";
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+      toggleButton.addEventListener("click", function (e) {
+        document
+          .querySelector("vehicle-info-card")
+          .shadowRoot.querySelector(".all").style.backgroundColor =
+          getRandomColor();
+      });
+
+      changeTitle.addEventListener("click", function (e) {
+        if (
+          document.querySelector("vehicle-info-card").modelName ==
+          "Toyota Tacoma"
+        ) {
+          document
+            .querySelector("vehicle-info-card")
+            .setAttribute("modelName", "Something Else");
+        } else {
+          document
+            .querySelector("vehicle-info-card")
+            .setAttribute("modelName", "Toyota Tacoma");
+        }
+      });
+    </script>
+  </body>
 </html>
