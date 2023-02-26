@@ -33,6 +33,11 @@ export class VehicleInfoCard extends LitElement {
       img: {
         type: String,
       },
+
+      opened: {
+        type: Boolean,
+        reflect: true,
+      },
     };
   }
 
@@ -108,10 +113,36 @@ export class VehicleInfoCard extends LitElement {
     this.subtitle = "Ethan Chen";
     this.img =
       "https://hips.hearstapps.com/hmg-prod/images/2023-toyota-gr-corolla-111-1648581910.jpg";
+    this.opened = false;
   }
 
-  toggleDetails() {
-    this.shadowRoot.querySelector(".details").toggleAttribute("open");
+  // toggleDetails() {
+  //   this.shadowRoot.querySelector(".details").toggleAttribute("open");
+  // }
+
+  toggleEvent(e) {
+    const state =
+      this.shadowRoot.querySelector("details").getAttribute("open") === ''
+        ? true
+        : false;
+    this.opened = state;
+  }
+
+  updated(changedProperties) {
+    changedProperties.forEach((oldValue, propName) => {
+      if (propName === 'opened') {
+        this.dispatchEvent(
+          new CustomEvent('open-changed', {
+            composed: true,
+            bubbles: true,
+            cacnelable: false,
+            detail: {
+              value: this[propName]
+            },
+          })
+        );
+      }
+    });
   }
 
   render() {
@@ -126,7 +157,11 @@ export class VehicleInfoCard extends LitElement {
           bottom-text="${this.bottomText}"
         ></meme-maker>
 
-        <details class="details">
+        <details
+          class="details"
+          .open=${this.opened}
+          @toggle="${this.toggleEvent}"
+        >
           <summary part="detailArrowthingy">Car Details</summary>
           <p class="text" part="descriptionText">${this.vehicleDescription}</p>
         </details>

@@ -27,18 +27,17 @@
         --vehicle-info-card-border-color: solid yellow;
       }
 
-      vehicle-info-card::part(descriptionText){
+      vehicle-info-card::part(descriptionText) {
         font-size: 20px;
       }
 
-      vehicle-info-card::part(slotSubtitle){
+      vehicle-info-card::part(slotSubtitle) {
         text-align: center;
       }
 
-      vehicle-info-card::part(detailArrowthingy){
-        padding: 10px; 
+      vehicle-info-card::part(detailArrowthingy) {
+        padding: 10px;
       }
-
     </style>
     <title>vehicle-info-card</title>
   </head>
@@ -53,7 +52,7 @@
 
       <button class="deleteButton">Delete Last Instance</button>
 
-      <button onclick="toggleDetails()" class="details">Detail</button>
+      <button class="details-button">Open Details</button>
     </div>
 
     <div id="app">
@@ -79,24 +78,38 @@
 
       const deleteButton = document.querySelector(".deleteButton");
 
-      const detailButton = document.querySelector(".details");
+      const detailButton = document.querySelector(".details-button");
 
       const toggleButton = document.querySelector(".toggleBackGroundColor");
 
       const changeTitle = document.querySelector(".changeTitle");
 
       const card = document.querySelector("vehicle-info-card");
-      
+
+      document.body.addEventListener("open-changed", (e) => {
+        if (e.target === document.querySelector("vehicle-info-card")) {
+          document.querySelector(".details-button").innerText = e.detail.value
+            ? 'Closed Detail'
+            : 'Open Detail';
+        }
+      });
+
+      detailButton.addEventListener("click", function (e) {
+        card.opened = !card.opened;
+      });
+
       copyButton.addEventListener("click", function (e) {
         const cloneCard = card.cloneNode(true);
-        var child = document.querySelector("#app").appendChild(cloneCard.cloneNode(true));
+        var child = document
+          .querySelector("#app")
+          .appendChild(cloneCard.cloneNode(true));
         child.classList.add("card2");
       });
 
       deleteButton.addEventListener("click", function (e) {
         var x = document.querySelector(".card2");
         x.remove(0);
-        
+
         // if (
         //   document.querySelector("#app :last-child") !=
         //   document.querySelector("vehicle-info-card")
@@ -122,9 +135,11 @@
         detailButton.blur();
       });
 
-      function toggleDetails() {
-        document.querySelector("vehicle-info-card").toggleDetails();
-      }
+
+      // function toggleDetails() {
+      //   document.querySelector("vehicle-info-card").toggleDetails();
+
+      // }
 
       function getRandomColor() {
         var letters = "0123456789ABCDEF";
