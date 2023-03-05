@@ -112,7 +112,7 @@ export class VehicleInfoCard extends LitElement {
     this.bottomText = "TRRRUCK";
     this.subtitle = "Ethan Chen";
     this.img =
-      "https://hips.hearstapps.com/hmg-prod/images/2023-toyota-gr-corolla-111-1648581910.jpg";
+    "https://www.kbb.com/wp-content/uploads/2020/01/763x430-brva-2020-toyota-tacoma.jpg";
     this.opened = false;
   }
 
@@ -122,7 +122,7 @@ export class VehicleInfoCard extends LitElement {
 
   toggleEvent(e) {
     const state =
-      this.shadowRoot.querySelector("details").getAttribute("open") === ''
+      this.shadowRoot.querySelector("details").getAttribute("open") === ""
         ? true
         : false;
     this.opened = state;
@@ -130,14 +130,14 @@ export class VehicleInfoCard extends LitElement {
 
   updated(changedProperties) {
     changedProperties.forEach((oldValue, propName) => {
-      if (propName === 'opened') {
+      if (propName === "opened") {
         this.dispatchEvent(
-          new CustomEvent('open-changed', {
+          new CustomEvent("open-changed", {
             composed: true,
             bubbles: true,
             cacnelable: false,
             detail: {
-              value: this[propName]
+              value: this[propName],
             },
           })
         );
@@ -152,7 +152,7 @@ export class VehicleInfoCard extends LitElement {
         <slot name="subtitle" part="slotSubtitle"></slot>
         <meme-maker
           alt="A Toyota Tacoma"
-          image-url="${toyotaTacoma}"
+          image-url="${this.img}"
           top-text="${this.topText}"
           bottom-text="${this.bottomText}"
         ></meme-maker>
