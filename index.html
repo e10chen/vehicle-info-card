@@ -89,8 +89,8 @@
       document.body.addEventListener("open-changed", (e) => {
         if (e.target === document.querySelector("vehicle-info-card")) {
           document.querySelector(".details-button").innerText = e.detail.value
-            ? 'Closed Detail'
-            : 'Open Detail';
+            ? "Closed Detail"
+            : "Open Detail";
         }
       });
 
@@ -134,7 +134,6 @@
         e.target.style.background = "";
         detailButton.blur();
       });
-
 
       // function toggleDetails() {
       //   document.querySelector("vehicle-info-card").toggleDetails();
