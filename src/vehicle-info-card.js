@@ -58,7 +58,7 @@ export class VehicleInfoCard extends LitElement {
         background-color: var(--vehicle-info-card-background-color, coral);
         margin-top: 10px;
       }
-      .text {
+      .vehicleDescription {
         text-indent: 5%;
         font-size: var(--vehicle-info-card-text-font-size, 16px);
         color: var(--vehicle-info-card-text-color, blue);
@@ -106,13 +106,12 @@ export class VehicleInfoCard extends LitElement {
   constructor() {
     super();
     this.modelName = "Toyota Tacoma";
-    this.vehicleDescription =
-      "The image above is a Tacoma pickup truck made by the Japanese automaker Toyota. Toyota has been making the Tacoma pickup truck since 1995. The Tacoma has two engines options: 2.7-liter 4-Cylinder and the 3.5-liter V6. It has a miles per gallon of 20 in the city and 23 on the highway.";
+    this.vehicleDescription = "";
     this.topText = "IM A";
     this.bottomText = "TRRRUCK";
     this.subtitle = "Ethan Chen";
     this.img =
-    "https://www.kbb.com/wp-content/uploads/2020/01/763x430-brva-2020-toyota-tacoma.jpg";
+      "https://www.kbb.com/wp-content/uploads/2020/01/763x430-brva-2020-toyota-tacoma.jpg";
     this.opened = false;
   }
 
@@ -163,7 +162,9 @@ export class VehicleInfoCard extends LitElement {
           @toggle="${this.toggleEvent}"
         >
           <summary part="detailArrowthingy">Car Details</summary>
-          <p class="text" part="descriptionText">${this.vehicleDescription}</p>
+          <div class="vehicleDescription">
+            <slot name="vehicleDescription"></slot>
+          </div>
         </details>
         <slot name="img"></slot>
       </div>
