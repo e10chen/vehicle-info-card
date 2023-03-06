@@ -11,9 +11,6 @@ export class VehicleInfoCard extends LitElement {
         type: String,
         reflect: true,
       },
-      vehicleDescription: {
-        type: String,
-      },
 
       topText: {
         type: String,
@@ -21,11 +18,6 @@ export class VehicleInfoCard extends LitElement {
       },
 
       bottomText: {
-        type: String,
-        reflect: true,
-      },
-
-      subtitle: {
         type: String,
         reflect: true,
       },
@@ -57,6 +49,9 @@ export class VehicleInfoCard extends LitElement {
         max-width: 500px;
         background-color: var(--vehicle-info-card-background-color, coral);
         margin-top: 10px;
+      }
+      .subtitle {
+        text-align: center;
       }
       .vehicleDescription {
         text-indent: 5%;
@@ -106,10 +101,8 @@ export class VehicleInfoCard extends LitElement {
   constructor() {
     super();
     this.modelName = "Toyota Tacoma";
-    this.vehicleDescription = "";
     this.topText = "IM A";
     this.bottomText = "TRRRUCK";
-    this.subtitle = "Ethan Chen";
     this.img =
       "https://www.kbb.com/wp-content/uploads/2020/01/763x430-brva-2020-toyota-tacoma.jpg";
     this.opened = false;
@@ -148,7 +141,9 @@ export class VehicleInfoCard extends LitElement {
     return html`
       <div class="all">
         <h1 class="title">${this.modelName}</h1>
+        <div class="subtitle">
         <slot name="subtitle" part="slotSubtitle"></slot>
+        </div>
         <meme-maker
           alt="A Toyota Tacoma"
           image-url="${this.img}"
