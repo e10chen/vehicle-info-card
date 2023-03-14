@@ -24,6 +24,7 @@ export class VehicleInfoCard extends LitElement {
 
       img: {
         type: String,
+        reflect: true,
       },
 
       opened: {
